@@ -40,6 +40,7 @@ distributions["Sk"] = scipy.stats.genexpon(0.12819671971752097, 3.17251050005097
 for stat in distributions:
     means[stat] = distributions[stat].mean()
 """  
+#speed up ppf function by drawing from table
 def ppf_(x, stat):
     x_ = max(1, int(round(x,4) *10000))
     x_ = min(9998, x_)
@@ -68,7 +69,9 @@ def simulate(c, l, team_mults, home, away):
             team = away
         box[stat] = max(0, int(round(team_mults[team][stat_]*ppf_(scipy.stats.norm().cdf(var), stat))))
     return box
-        
+ 
+#after generating stats for each player, adjust so the totals match the stat
+#line generated for game       
 def adjust(stats, target):
     s = stats.copy()
     total = 0
@@ -198,6 +201,8 @@ defs = {}
 rosters = {}
 players = {}
 qbs = {}
+
+#designate rosters and their qbs/defenses
 for game in games:
     for t in game:
         rosters[t] = raw_stats.query("(team == @t)").reset_index()
@@ -206,13 +211,12 @@ for game in games:
         defs[t] = dict(rosters[t].loc[len(rosters[t])-2])
         qbs[t] = rosters[t].loc[0]["player"]
 
-
+#store fantasy scores for three main sites
 s['sites'] = {"dk": [], "yahoo": [], "fd": []}
 s['scp'] = []
 box_scores = {}
 for simulations in range(1000):
     
-    t = time.time()
     pass_yds = {}
     pass_tds = {}
     pass_int = {}
