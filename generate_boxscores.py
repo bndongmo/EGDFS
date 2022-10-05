@@ -13,16 +13,13 @@ from scipy.stats import norm
 
 
 #distributions
-d = shelve.open("distributions")
-m = shelve.open("means")
-p = shelve.open("ppfs")
-distributions = d['1']
-means = m['1']
-ppfs = p['1']
-d.close()
-m.close()
-p.close()
-"""
+box_score_stats = shelve.open("box_score_stats")
+distributions = box_score_stats['distributions']
+means = box_score_stats['means']
+ppfs = box_score_stats['ppfs']
+
+box_score_stats.close()
+
 for stat in distributions:
     for i in range(1,10000):
         ppfs[stat] = ppfs.setdefault(stat, []) + [distributions[stat].ppf(i/10000)]
@@ -42,7 +39,7 @@ distributions["Sk"] = scipy.stats.genexpon(0.12819671971752097, 3.17251050005097
 
 for stat in distributions:
     means[stat] = distributions[stat].mean()
-"""    
+  
 def ppf_(x, stat):
     x_ = max(1, int(round(x,4) *10000))
     x_ = min(9998, x_)
@@ -158,14 +155,6 @@ for s in l:
         newdf[s] = pandas.Series.append(df[s], df["Opp "+s])
 
 l = l[:12]
-
-    
-#fit distributions
-s = shelve.open('fitted')
-summary = {}
-for stat in l:
-   summary[stat] = s[stat]
-s.close()
 
 #compute correlation matrix   
 df -= mean
@@ -374,5 +363,5 @@ for simulations in range(1000):
     s['scp'] += [scp_fantasy_score]
 
 s.close()
-
+ 
 
