@@ -20,10 +20,10 @@ ppfs = box_score_stats['ppfs']
 
 box_score_stats.close()
 """
+#Shelved
 for stat in distributions:
     for i in range(1,10000):
         ppfs[stat] = ppfs.setdefault(stat, []) + [distributions[stat].ppf(i/10000)]
-#Shelved
 distributions["Def TD"] = scipy.stats.burr(4.126208824929675, 0.2600019324466717, loc=-0.499812, scale=1.05178)
 distributions["FGA"] = scipy.stats.rice(1.028987322136138, loc=-0.677999, scale=1.64842)
 distributions["FGM"] = scipy.stats.genexpon(0.00265365750130161, 1.9159667967714462, 0.0001780388308651802, loc=-0.546454, scale=0.0350111)
