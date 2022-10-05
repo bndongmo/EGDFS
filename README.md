@@ -1,6 +1,6 @@
 # PlusEV-DFS
 fun little project
-Planned Features:\n
+Planned Features:
 Simulate the score outcomes of a specific player/lineup (free, pay to import mass lineups)
 Display correlation coefficients between two players in the same game (free prob)
 Allow users to tweak player projections with a multiplier based on who they like-free (maybe full on importing new projections in the future, paid)
