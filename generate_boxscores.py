@@ -19,7 +19,7 @@ means = box_score_stats['means']
 ppfs = box_score_stats['ppfs']
 
 box_score_stats.close()
-
+"""
 for stat in distributions:
     for i in range(1,10000):
         ppfs[stat] = ppfs.setdefault(stat, []) + [distributions[stat].ppf(i/10000)]
@@ -39,7 +39,7 @@ distributions["Sk"] = scipy.stats.genexpon(0.12819671971752097, 3.17251050005097
 
 for stat in distributions:
     means[stat] = distributions[stat].mean()
-  
+"""  
 def ppf_(x, stat):
     x_ = max(1, int(round(x,4) *10000))
     x_ = min(9998, x_)
@@ -211,6 +211,8 @@ s['sites'] = {"dk": [], "yahoo": [], "fd": []}
 s['scp'] = []
 box_scores = {}
 for simulations in range(1000):
+    
+    t = time.time()
     pass_yds = {}
     pass_tds = {}
     pass_int = {}
@@ -334,6 +336,8 @@ for simulations in range(1000):
       
         fantasy_score[home_d["player"]] = b["Opp Sk"] + b["Opp Int"]*2 + b["Def TD"]*6 + tier(away_score)
         fantasy_score[away_d["player"]] = b["Sk"] + b["Int"]*2 + b["Opp Def TD"]*6 + tier(home_score)
+        dk_fantasy_score[home_d["player"]] = fantasy_score[home_d["player"]]
+        dk_fantasy_score[away_d["player"]] = fantasy_score[away_d["player"]]
         scp_fantasy_score[home_d["player"]] = b["Opp Sk"]*2 + b["Opp Int"]*3 + b["Def TD"]*6 + tier(away_score, True) + yds_tier(away_yards)
         scp_fantasy_score[away_d["player"]] = b["Sk"]*2 + b["Int"]*3 + b["Opp Def TD"]*6 + tier(home_score, True) + yds_tier(home_yards)
         for team in game:
@@ -361,7 +365,6 @@ for simulations in range(1000):
     s['sites']['fd'].append(fantasy_score)
     s['sites']['dk'].append(dk_fantasy_score)
     s['scp'] += [scp_fantasy_score]
-
 s.close()
  
 
