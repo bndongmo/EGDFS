@@ -9,4 +9,4 @@ Generate User Lineups with target stack frequencies (paid, free to a certain num
 Generate a possible lineup pool of opposing lineups based on ownership projections and target stack frequencies (free prob)
 Define contest prize structures and simulate the performance (expected value, growth) of a lineup in said contest (certain number of contests free)
 Recommend which contests to enter to maximize expected growth or value (paid)
-Player Fade tool- identify players who benefit the most from a specific player underperforming in terms of lineup optimality (free)
+Player Fade tool- identify players who benefit the most from a specific player underperforming in terms of lineup optimality (free)b
