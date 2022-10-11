@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <link rel="stylesheet" href="{% static 'EGdfs_app/style.css' %}">
 
 <head></head>
@@ -7,4 +8,9 @@
         <h1>EG dfs</h1>
         <p>A math based approach to daily fantasy.</p>
     </div>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}.</p>
+    {% else %}
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
 </body>
